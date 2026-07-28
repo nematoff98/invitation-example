@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#171310" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- ============================================================
+         TAKLIFNOMA — TAHRIRLASH QO'LLANMASI
+         Hamma matnni shu faylning ichidan topib almashtiring:
+           • Ismlar ....... "data-groom" / "data-bride" va sahnalardagi matn
+           • Sana ......... <time datetime="..."> (countdown shu qiymatdan o'qiydi)
+           • To'yxona ..... "Manzil" sahnasi + "Xaritada ochish" havolasi
+           • Dastur ....... "Dastur" sahnasidagi <li> lar
+           • Karta raqami . "To'yona" sahnasidagi .card__number
+           • Aloqa ........ "Yakun" sahnasidagi telefon raqamlari
+           • Musiqa ....... <body data-music="/audio/nikoh.mp3">  (fayl qo'shing)
+         ============================================================ -->
+
+    <title>Taklifnoma · Malika & Jasur to'yi</title>
+    <meta name="description" content="Malika va Jasurning nikoh to'yiga taklifnoma. 12-sentabr, 2026-yil. Sizni shu qutlug' kunimizda ko'rishdan baxtiyormiz." />
+
+    <!-- Havola ko'rinishi (WhatsApp/Telegram preview) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Malika & Jasur — Nikoh to'yiga taklifnoma" />
+    <meta property="og:description" content="12-sentabr, 2026-yil. Sizni shu qutlug' kunimizda ko'rishdan baxtiyormiz." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&h=630&q=70" />
+
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <script type="module" crossorigin src="/assets/index-BNor1Wut.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Ba4rDdpl.css">
+  </head>
+
+  <body data-music="/audio/nikoh.mp3">
+    <!-- Progress: qaysi sahnadamiz -->
+    <nav class="progress" aria-label="Sahna ko'rsatkichi" hidden>
+      <ol class="progress__dots" id="progressDots"></ol>
+    </nav>
+
+    <!-- Musiqa tugmasi (default O'CHIQ) -->
+    <button
+      class="music"
+      id="musicBtn"
+      type="button"
+      aria-pressed="false"
+      aria-label="Musiqani yoqish"
+    >
+      <span class="music__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="music__label">Musiqa</span>
+    </button>
+
+    <main class="deck" id="deck">
+      <!-- 1 · OCHILISH -->
+      <section class="scene scene--open" id="scene-open" aria-labelledby="open-title">
+        <div class="scene__media" data-media>
+          <div class="scene__wash scene__wash--vignette"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <div class="monogram" data-rise aria-hidden="true">
+            <span>M</span><span class="monogram__amp">&amp;</span><span>J</span>
+          </div>
+          <p class="kicker" data-rise>Bismillahir Rohmanir Rohiym</p>
+          <h1 class="display display--xl" id="open-title" data-rise>Taklifnoma</h1>
+          <p class="lede" data-rise>
+            Farzandlarimiz <b data-bride>Malika</b> va <b data-groom>Jasur</b>ning
+            nikoh to'yi marosimiga sizni taklif qilamiz.
+          </p>
+          <a class="scrollhint" href="#scene-couple" data-rise>
+            <span>Boshlash uchun suring</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2 · KELIN VA KUYOV -->
+      <section class="scene scene--couple" id="scene-couple" aria-labelledby="couple-title">
+        <div class="scene__media" data-media>
+          <img
+            class="scene__img"
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=72"
+            srcset="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=72 1600w"
+            sizes="100vw"
+            width="1600" height="2400"
+            alt="Kelin va kuyov quyosh nuriga to'lgan oqshomda guldasta bilan"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <div class="scene__wash scene__wash--bottom"></div>
+        </div>
+        <div class="scene__body scene__body--end">
+          <p class="kicker kicker--gold" data-rise>Kelin va Kuyov</p>
+          <h2 class="display display--names" id="couple-title" data-rise>
+            <span data-bride>Malika</span>
+            <span class="names__amp">va</span>
+            <span data-groom>Jasur</span>
+          </h2>
+          <p class="lede lede--quiet" data-rise>Ikki qalb — bir umr yo'li.</p>
+        </div>
+      </section>
+
+      <!-- 3 · SANA -->
+      <section class="scene scene--date" id="scene-date" aria-labelledby="date-title">
+        <div class="scene__media" data-media>
+          <div class="scene__wash scene__wash--radial"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <p class="kicker kicker--gold" data-rise>Marosim sanasi</p>
+          <p class="dateline" data-rise>
+            <span class="dateline__day">Shanba</span>
+            <time class="dateline__date" datetime="2026-09-12T18:00:00+05:00">
+              <span class="dateline__num">12</span>
+              <span class="dateline__mon">Sentabr</span>
+              <span class="dateline__year">2026</span>
+            </time>
+          </p>
+          <div class="countdown" data-rise data-countdown aria-label="To'yga qolgan vaqt">
+            <div class="countdown__unit"><b data-cd="days">00</b><small>kun</small></div>
+            <div class="countdown__unit"><b data-cd="hours">00</b><small>soat</small></div>
+            <div class="countdown__unit"><b data-cd="mins">00</b><small>daqiqa</small></div>
+            <div class="countdown__unit"><b data-cd="secs">00</b><small>soniya</small></div>
+          </div>
+          <p class="countdown__done" data-cd-done hidden>Bugun — o'sha qutlug' kun!</p>
+        </div>
+      </section>
+
+      <!-- 4 · MANZIL -->
+      <section class="scene scene--venue" id="scene-venue" aria-labelledby="venue-title">
+        <div class="scene__media" data-media>
+          <img
+            class="scene__img"
+            data-src="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21e?auto=format&fit=crop&w=1600&q=72"
+            data-srcset="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21e?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21e?auto=format&fit=crop&w=1600&q=72 1600w"
+            sizes="100vw"
+            width="1600" height="2400"
+            alt="Sham nuri va gulbarglar bilan bezatilgan oqshomgi to'yxona zali"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="scene__wash scene__wash--full"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <p class="kicker kicker--gold" data-rise>Manzil va vaqt</p>
+          <h2 class="display display--md" id="venue-title" data-rise>&laquo;Navro'z&raquo; to'yxonasi</h2>
+          <p class="venue__addr" data-rise>
+            Toshkent shahri, Chilonzor tumani,<br />
+            Bunyodkor shoh ko'chasi, 12-uy
+          </p>
+          <p class="venue__time" data-rise><span>Soat</span> 18:00 <span>dan</span></p>
+          <a
+            class="btn btn--gold"
+            data-rise
+            href="https://www.google.com/maps/search/?api=1&query=Navro%27z%20to%27yxonasi%20Chilonzor%20Toshkent"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Xaritada ochish
+          </a>
+        </div>
+      </section>
+
+      <!-- 5 · DASTUR -->
+      <section class="scene scene--program" id="scene-program" aria-labelledby="program-title">
+        <div class="scene__media" data-media>
+          <div class="scene__wash scene__wash--radial"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <p class="kicker kicker--gold" data-rise>Marosim tartibi</p>
+          <h2 class="display display--md" id="program-title" data-rise>Dastur</h2>
+          <ol class="timeline">
+            <li class="timeline__item" data-rise>
+              <span class="timeline__time">17:30</span>
+              <span class="timeline__label">Mehmonlarni kutib olish</span>
+            </li>
+            <li class="timeline__item" data-rise>
+              <span class="timeline__time">18:00</span>
+              <span class="timeline__label">Nikoh marosimi</span>
+            </li>
+            <li class="timeline__item" data-rise>
+              <span class="timeline__time">19:00</span>
+              <span class="timeline__label">Ziyofat va tabriklar</span>
+            </li>
+            <li class="timeline__item" data-rise>
+              <span class="timeline__time">21:00</span>
+              <span class="timeline__label">Tort va raqs</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 6 · TO'YONA -->
+      <section class="scene scene--toyona" id="scene-toyona" aria-labelledby="toyona-title">
+        <div class="scene__media" data-media>
+          <img
+            class="scene__img"
+            data-src="https://images.unsplash.com/photo-1457089328109-e5d9bd499191?auto=format&fit=crop&w=1600&q=72"
+            data-srcset="https://images.unsplash.com/photo-1457089328109-e5d9bd499191?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1457089328109-e5d9bd499191?auto=format&fit=crop&w=1600&q=72 1600w"
+            sizes="100vw"
+            width="1600" height="2400"
+            alt="Qorong'i fonda to'q ranglardagi nafis gullar guldastasi"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="scene__wash scene__wash--full"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <p class="kicker kicker--gold" data-rise>To'yona</p>
+          <h2 class="display display--md" id="toyona-title" data-rise>Sovg'angiz uchun</h2>
+          <p class="lede lede--quiet" data-rise>
+            Ishtirok etolmasangiz, to'yona shu kartaga o'tkazsangiz bo'ladi.
+          </p>
+          <div class="card" data-rise>
+            <div class="card__row">
+              <span class="card__bank">Uzcard</span>
+              <span class="card__chip" aria-hidden="true"></span>
+            </div>
+            <button class="card__number" type="button" id="copyCard" data-copy="8600030412345678" aria-label="Karta raqamini nusxalash">
+              <span class="card__digits">8600&nbsp;0304&nbsp;1234&nbsp;5678</span>
+              <span class="card__copy" data-copy-icon aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </span>
+            </button>
+            <div class="card__row">
+              <span class="card__holder">Jasur Karimov</span>
+              <span class="card__hint" data-copy-hint aria-live="polite">Nusxalash uchun bosing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 · YAKUN -->
+      <section class="scene scene--close" id="scene-close" aria-labelledby="close-title">
+        <div class="scene__media" data-media>
+          <div class="scene__wash scene__wash--vignette"></div>
+        </div>
+        <div class="scene__body scene__body--center">
+          <div class="monogram monogram--sm" data-rise aria-hidden="true">
+            <span>M</span><span class="monogram__amp">&amp;</span><span>J</span>
+          </div>
+          <h2 class="display display--lg" id="close-title" data-rise>Sizni kutamiz</h2>
+          <p class="lede" data-rise>
+            Shu qutlug' kunimizda siz bilan birga bo'lish biz uchun katta baxt.
+            Kelishingizni intizorlik bilan kutamiz.
+          </p>
+          <ul class="contacts" data-rise>
+            <li>
+              <span class="contacts__role">Kuyov tomondan</span>
+              <a class="contacts__phone" href="tel:+998901234567">+998 90 123 45 67</a>
+            </li>
+            <li>
+              <span class="contacts__role">Kelin tomondan</span>
+              <a class="contacts__phone" href="tel:+998912345678">+998 91 234 56 78</a>
+            </li>
+          </ul>
+          <p class="signoff" data-rise>Hurmat ila, <span data-bride>Malika</span> &amp; <span data-groom>Jasur</span></p>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>

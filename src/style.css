@@ -1,0 +1,642 @@
+/* Fonts — self-hosted, subset for a light, fast load */
+@import "@fontsource/prata/latin-400.css";
+@import "@fontsource-variable/manrope/wght.css";
+
+/* =========================================================
+   TOKENS — candlelit evening hall (deep, warm, gold as ink)
+   ========================================================= */
+:root {
+  /* Surface — deep warm charcoal, low tint toward gold (environmental) */
+  --bg:        oklch(0.158 0.014 60);
+  --bg-deep:   oklch(0.112 0.012 60);
+  --surface:   oklch(0.212 0.016 60);
+  --surface-2: oklch(0.262 0.018 60);
+  --line:      oklch(0.34 0.018 62 / 0.55);
+
+  /* Ink */
+  --ink:    oklch(0.955 0.010 82);
+  --muted:  oklch(0.760 0.016 74);
+
+  /* Brand — gold carries the surface; rose is a whisper */
+  --gold:      oklch(0.815 0.118 74);
+  --gold-soft: oklch(0.885 0.076 80);
+  --gold-deep: oklch(0.640 0.110 66);
+  --rose:      oklch(0.700 0.098 24);
+
+  /* Type */
+  --display: "Prata", "Times New Roman", Georgia, serif;
+  --body: "Manrope Variable", "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Motion */
+  --e-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Z-scale */
+  --z-progress: 40;
+  --z-music: 45;
+
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--body);
+  font-weight: 380;
+  color: var(--ink);
+  background: var(--bg-deep);
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100svh;
+}
+
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.display--xl { font-size: clamp(2.85rem, 14vw, 5rem); letter-spacing: -0.02em; }
+.display--lg { font-size: clamp(2.6rem, 12vw, 4.2rem); }
+.display--md { font-size: clamp(2rem, 8.5vw, 3rem); }
+
+.display--names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06em;
+  font-size: clamp(2.9rem, 15vw, 5rem);
+  line-height: 0.98;
+}
+.names__amp {
+  font-family: var(--body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.3em;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: lowercase;
+}
+
+.kicker {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(0.72rem, 3vw, 0.82rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kicker--gold { color: var(--gold); }
+
+.lede {
+  max-width: 34ch;
+  margin-inline: auto;
+  font-size: clamp(1rem, 4.4vw, 1.15rem);
+  line-height: 1.62;
+  color: color-mix(in oklab, var(--ink) 88%, transparent);
+  text-wrap: pretty;
+}
+.lede b { font-weight: 600; color: var(--gold-soft); }
+.lede--quiet { color: var(--muted); font-size: clamp(0.95rem, 4vw, 1.05rem); }
+
+/* =========================================================
+   DECK + SCENES
+   Default (no-JS / reduced motion): scenes flow vertically,
+   content visible. JS deck mode stacks + pins them.
+   ========================================================= */
+.deck { position: relative; width: 100%; }
+
+.scene {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  padding: calc(4rem + var(--safe-t)) 1.75rem calc(4rem + var(--safe-b));
+  overflow: hidden;
+}
+
+.scene__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+.scene__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  filter: saturate(0.82) brightness(0.62) contrast(1.04);
+}
+
+/* Washes — unify every image into one candlelit, gold-tinted world */
+.scene__wash { position: absolute; inset: 0; pointer-events: none; }
+.scene__wash--vignette {
+  background:
+    radial-gradient(120% 90% at 50% 8%, oklch(0.30 0.05 66 / 0.30), transparent 55%),
+    radial-gradient(140% 120% at 50% 120%, oklch(0.05 0.01 60 / 0.85), transparent 60%),
+    var(--bg);
+}
+.scene__wash--radial {
+  background:
+    radial-gradient(100% 70% at 50% 34%, oklch(0.32 0.055 66 / 0.34), transparent 60%),
+    var(--bg);
+}
+.scene__wash--bottom {
+  background: linear-gradient(
+    to top,
+    oklch(0.08 0.012 60 / 0.96) 4%,
+    oklch(0.10 0.012 60 / 0.62) 34%,
+    oklch(0.14 0.014 60 / 0.18) 66%,
+    oklch(0.20 0.02 60 / 0.30) 100%
+  );
+}
+.scene__wash--full {
+  background:
+    linear-gradient(to top, oklch(0.08 0.012 60 / 0.92), oklch(0.10 0.012 60 / 0.72) 55%, oklch(0.12 0.012 60 / 0.8)),
+    radial-gradient(90% 60% at 50% 40%, oklch(0.30 0.05 66 / 0.16), transparent 70%);
+}
+
+/* Fine grain to kill banding on the gradients */
+.scene__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.scene__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.1rem, 4vw, 1.6rem);
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.scene__body--center { place-self: center; }
+.scene__body--end { place-self: end center; padding-bottom: clamp(1rem, 6vh, 3rem); }
+
+/* Deck mode (JS + motion allowed): scenes stack inside one pinned viewport
+   and cross-dissolve. Without this class the scenes simply flow vertically. */
+.is-deck .deck { height: 100svh; }
+.is-deck .scene {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  height: 100svh;
+}
+.is-deck .scene:not(:first-child) { visibility: hidden; }
+
+/* =========================================================
+   MONOGRAM
+   ========================================================= */
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 11vw, 3.4rem);
+  color: var(--gold);
+  line-height: 1;
+}
+.monogram::before,
+.monogram::after {
+  content: "";
+  width: clamp(1.6rem, 9vw, 3rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-deep));
+  opacity: 0.7;
+}
+.monogram::after { transform: scaleX(-1); }
+.monogram__amp {
+  font-size: 0.6em;
+  color: var(--gold-deep);
+  transform: translateY(-0.04em);
+}
+.monogram--sm { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+
+/* =========================================================
+   SCROLL HINT
+   ========================================================= */
+.scrollhint {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: clamp(0.5rem, 4vh, 1.5rem);
+  font-family: var(--body);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scrollhint svg { color: var(--gold); animation: nudge 2.4s var(--e-out) infinite; }
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* =========================================================
+   DATE + COUNTDOWN
+   ========================================================= */
+.dateline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.dateline__day {
+  font-family: var(--body);
+  font-size: 0.82rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dateline__date {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.7rem, 4vw, 1.2rem);
+  font-family: var(--display);
+  color: var(--ink);
+}
+.dateline__num { font-size: clamp(3rem, 15vw, 4.4rem); line-height: 1; color: var(--gold); }
+.dateline__mon,
+.dateline__year {
+  display: block;
+  font-size: clamp(1rem, 5vw, 1.4rem);
+  text-align: left;
+  line-height: 1.15;
+}
+.dateline__date > time,
+.dateline__date { }
+.dateline__date .dateline__mon { color: var(--ink); }
+.dateline__date .dateline__year { color: var(--muted); }
+
+/* stack mon over year */
+.dateline__date {
+  --_gap: 0;
+}
+.dateline__mon { margin-bottom: 0.1em; }
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.4rem, 2.5vw, 0.9rem);
+  width: 100%;
+  max-width: 24rem;
+  margin-top: 0.4rem;
+}
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: clamp(0.7rem, 3vw, 1rem) 0.3rem;
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  backdrop-filter: blur(3px);
+}
+.countdown__unit b {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 8vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+}
+.countdown__unit small {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.countdown__done {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+/* =========================================================
+   VENUE
+   ========================================================= */
+.venue__addr { color: var(--muted); line-height: 1.7; font-size: clamp(0.98rem, 4vw, 1.08rem); }
+.venue__time {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  color: var(--gold-soft);
+}
+.venue__time span { font-family: var(--body); font-size: 0.5em; color: var(--muted); letter-spacing: 0.06em; }
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.25s var(--e-out), background-color 0.25s var(--e-out), box-shadow 0.25s var(--e-out);
+}
+.btn--gold {
+  color: oklch(0.20 0.03 66);
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  box-shadow: 0 1px 0 oklch(1 0 0 / 0.35) inset, 0 10px 30px -12px oklch(0.72 0.12 70 / 0.6);
+}
+.btn--gold:hover { transform: translateY(-2px); box-shadow: 0 1px 0 oklch(1 0 0 / 0.4) inset, 0 16px 40px -14px oklch(0.72 0.12 70 / 0.7); }
+.btn--gold:active { transform: translateY(0) scale(0.98); }
+
+/* =========================================================
+   TIMELINE (DASTUR)
+   ========================================================= */
+.timeline {
+  list-style: none;
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+}
+.timeline__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 1rem;
+  padding: clamp(0.85rem, 3.5vw, 1.1rem) 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.timeline__item:last-child { border-bottom: none; }
+.timeline__time {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.4rem;
+}
+.timeline__label { color: var(--ink); font-size: 1.02rem; }
+
+/* =========================================================
+   TO'YONA CARD
+   ========================================================= */
+.card {
+  width: 100%;
+  max-width: 22rem;
+  padding: clamp(1.2rem, 5vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(155deg, oklch(0.26 0.02 66 / 0.9), oklch(0.18 0.016 60 / 0.92));
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px -30px oklch(0 0 0 / 0.8), 0 1px 0 oklch(1 0 0 / 0.06) inset;
+}
+.card__row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.card__bank {
+  font-family: var(--display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--gold-soft);
+}
+.card__chip {
+  width: 2.4rem; height: 1.7rem;
+  border-radius: 0.35rem;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold-deep));
+  box-shadow: inset 0 0 0 1px oklch(1 0 0 / 0.25);
+  position: relative;
+}
+.card__chip::after {
+  content: ""; position: absolute; inset: 0.35rem 0.5rem;
+  border: 1px solid oklch(0.3 0.03 66 / 0.5); border-radius: 0.15rem;
+}
+.card__number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.7rem;
+  background: oklch(0.12 0.012 60 / 0.6);
+  border: 1px solid var(--line);
+  transition: border-color 0.25s var(--e-out), background-color 0.25s var(--e-out);
+}
+.card__number:hover { border-color: color-mix(in oklab, var(--gold) 55%, var(--line)); }
+.card__digits {
+  font-family: var(--display);
+  font-size: clamp(1.25rem, 6.2vw, 1.6rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.card__copy { color: var(--gold); display: inline-flex; transition: transform 0.2s var(--e-out); }
+.card__number:active .card__copy { transform: scale(0.9); }
+.card__number.is-copied { border-color: color-mix(in oklab, var(--gold) 70%, transparent); }
+.card__holder { font-size: 0.92rem; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
+.card__hint { font-size: 0.78rem; color: var(--muted); transition: color 0.2s var(--e-out); }
+.card__hint.is-copied { color: var(--gold); }
+
+/* =========================================================
+   CONTACTS + SIGNOFF
+   ========================================================= */
+.contacts {
+  list-style: none;
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.contacts li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: color-mix(in oklab, var(--surface) 55%, transparent);
+}
+.contacts__role { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.contacts__phone {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.signoff {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+.signoff span { color: var(--gold); }
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+.progress {
+  position: fixed;
+  right: max(0.9rem, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-progress);
+}
+.progress__dots { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.progress__dots button {
+  display: block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: oklch(0.7 0.02 74 / 0.35);
+  transition: background-color 0.3s var(--e-out), transform 0.3s var(--e-out);
+}
+.progress__dots li.is-active button { background: var(--gold); transform: scale(1.5); }
+
+/* =========================================================
+   MUSIC TOGGLE
+   ========================================================= */
+.music {
+  position: fixed;
+  left: max(1rem, env(safe-area-inset-left));
+  bottom: calc(1rem + var(--safe-b));
+  z-index: var(--z-music);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem 0.55rem 0.7rem;
+  border-radius: 999px;
+  background: oklch(0.16 0.014 60 / 0.72);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -14px oklch(0 0 0 / 0.7);
+  transition: transform 0.25s var(--e-out), border-color 0.25s var(--e-out), opacity 0.4s var(--e-out);
+}
+.music:hover { transform: translateY(-1px); border-color: color-mix(in oklab, var(--gold) 40%, var(--line)); }
+.music__label { font-size: 0.8rem; letter-spacing: 0.06em; color: var(--muted); }
+.music[aria-pressed="true"] .music__label { color: var(--gold); }
+.music__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.music__eq i {
+  width: 2.5px;
+  height: 5px;
+  border-radius: 2px;
+  background: var(--gold);
+  transform-origin: bottom;
+}
+.music[aria-pressed="true"] .music__eq i { animation: eq 0.9s var(--e-quart) infinite; }
+.music[aria-pressed="true"] .music__eq i:nth-child(2) { animation-delay: 0.15s; }
+.music[aria-pressed="true"] .music__eq i:nth-child(3) { animation-delay: 0.3s; }
+.music[aria-pressed="true"] .music__eq i:nth-child(4) { animation-delay: 0.45s; }
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(2.4); }
+}
+.music[data-unavailable] { opacity: 0.55; }
+.music[data-unavailable] .music__eq { display: none; }
+
+/* =========================================================
+   REVEAL (flow mode: default visible, JS enhances)
+   ========================================================= */
+[data-rise] { will-change: auto; }
+
+/* =========================================================
+   DESKTOP — the invite is a mobile story; on large screens we
+   frame it as a centered portrait card in an ambient surround
+   rather than stretching it flat.
+   ========================================================= */
+@media (min-width: 700px) {
+  body {
+    background:
+      radial-gradient(70% 55% at 50% 26%, oklch(0.22 0.035 66 / 0.55), transparent 72%),
+      radial-gradient(90% 90% at 50% 120%, oklch(0.06 0.01 60 / 0.9), transparent 70%),
+      var(--bg-deep);
+    padding: clamp(1.5rem, 4vh, 3rem) 0;
+  }
+
+  .is-deck .deck {
+    width: min(30rem, 100%);
+    margin-inline: auto;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    box-shadow:
+      0 50px 130px -45px oklch(0 0 0 / 0.92),
+      0 0 0 1px oklch(1 0 0 / 0.05),
+      0 0 0 10px oklch(0.18 0.016 60 / 0.35);
+  }
+  .is-deck .deck,
+  .is-deck .scene { height: min(100svh - 3rem, 52rem); }
+
+  /* Display scales are viewport-based; inside the narrow frame they must
+     step down so headlines never reach the rail. */
+  .display--xl { font-size: clamp(2.6rem, 5vw, 3.5rem); }
+  .display--names { font-size: clamp(2.6rem, 5vw, 3.6rem); }
+  .display--lg { font-size: clamp(2.4rem, 4.4vw, 3.1rem); }
+  .display--md { font-size: clamp(1.85rem, 3.4vw, 2.35rem); }
+  .dateline__num { font-size: clamp(2.6rem, 5vw, 3.4rem); }
+
+  /* Flow mode (reduced motion): calm centered column, not full-bleed */
+  .scene__body { max-width: 27rem; }
+  .lede { max-width: 38ch; }
+
+  /* Global controls hug the framed column instead of the screen edges */
+  .progress { right: max(1.25rem, calc(50vw - 16rem)); }
+  .music { left: max(1.25rem, calc(50vw - 16rem)); }
+}
+
+@media (min-width: 700px) and (prefers-reduced-motion: reduce) {
+  .scene { max-width: 34rem; margin-inline: auto; }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scrollhint svg { animation: none; }
+  .scene__img { transform: scale(1); }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "toy-taklifnomasi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Premium to'y taklifnoma sahifasi — kinematik, mobil-birinchi",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.1.1",
+    "@fontsource/prata": "^5.1.1",
+    "gsap": "^3.13.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
