@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build chiqishi
+dist/
+
+# IDE / muharrir
+.idea/
+.vscode/
+*.iml
+
+# OS fayllari
+.DS_Store
+Thumbs.db
+
+# Loglar
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Muhit o'zgaruvchilari
+.env
+.env.local
+.env.*.local
+
+# Vaqtinchalik / kesh
+.cache/
+*.tmp
